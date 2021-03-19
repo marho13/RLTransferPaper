@@ -8,8 +8,6 @@ import os
 import re
 
 file_name = "D:/CarracingData/training_data-"
-
-starting_value = 0
 keyList = ["\b"]
 
 for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789,.'£$/\\":
@@ -49,14 +47,13 @@ def findStartIter():
         num = (re.search('([1-9][0-9]*)', f).group(0))
         if int(num) > max:
             max = int(num)
-    print(max)
     return max
 
 def envInit(env_name="CarRacing-v0", render=False):
     env = gym.make(env_name)
     state = env.reset()
-    findStartIter()
-    return env, state
+    starting_value = findStartIter()
+    return env, state, starting_value
 
 def actionTranslation(keys):
     actionDict = {"w": np.array([0, 1.0, 0]), "a": np.array([-1.0, 0, 0]), "s": np.array([0, 0, 1]),
@@ -68,8 +65,8 @@ def actionTranslation(keys):
     except:
         return None
 
-def main(file_name, starting_value):
-    env, state = envInit()
+def main(file_name):
+    env, state, starting_value = envInit()
     env.render()
     file_name = file_name
     starting_value = starting_value
@@ -115,10 +112,10 @@ def main(file_name, starting_value):
 
 # #
 # #
-# main(file_name, starting_value)
+# main(file_name)
 # output = key_check()
 # print(output, actionTranslation(output))
-env, state = envInit()
+# env, state = envInit()
 # env.render()
 # while True:
 #     if msvcrt.kbhit():
