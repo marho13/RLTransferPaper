@@ -1,3 +1,7 @@
+import torch
+def MSE(x, y):
+    return x-y
+
 listFiles = []
 def vidLoader():
     pass
@@ -18,7 +22,7 @@ def new(epochs=45, batchSize=10):
     for e in epochs:
         for num in len(listFiles) // batchSize:
             x = [vidLoader(f) for f in listFiles[batchSize * num: batchSize * (num + 1)]]
-            y = [batchSize * num: batchSize * (num + 1)]
+            y = listFiles[batchSize * num: batchSize * (num + 1)]
             pred = model(x)
 
             torch.no_grad()
