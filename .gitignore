@@ -1,0 +1,6 @@
+.idea*
+.idea/*
+*.zip
+*.tar.gz
+data/*
+data
